@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import React from 'react';
+import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { Chatroom, Status } from '../entities/Chatroom';
-import { addChatroom, fetchChatrooms, toggleHappy } from '../store/actions/chat.actions';
+import { useGetChatrooms, usePostChatmessage, usePostChatroom } from '../hooks/chats';
+import { toggleHappy } from '../store/actions/chat.actions';
 import { StackParamList } from "../typings/navigations";
 
 type ScreenNavigationType = NativeStackNavigationProp<
@@ -13,25 +15,48 @@ type ScreenNavigationType = NativeStackNavigationProp<
 >
 
 export default function Screen1() {
+    // Get QueryClient from the context
+    const queryClient = useQueryClient()
     const navigation = useNavigation<ScreenNavigationType>()
     const [title, onChangeTitle] = React.useState('');
+    const [message, setMessage] = React.useState('');
+
 
     const isHappy = useSelector((state: any) => state.chat.isHappy) // subscribe to redux store and select attribute (isHappy)
-    const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
+    // const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
+    const loggedInUser = useSelector((state: any) => state.user.loggedInUser);
+    const { isLoading, isError, chatrooms, error } = useGetChatrooms();
+    console.log("react query", chatrooms);
+    const { mutate: createChatroom } = usePostChatroom()
+    const { mutate: createChatmessage } = usePostChatmessage('-MyqTM_GYmJUQqBS0j-F')
+
+
 
     // console.log("isHappy", isHappy);
     const dispatch = useDispatch()
 
-    useEffect(() => { // only runs dispatch the first time the component renders
-        dispatch(fetchChatrooms())
-    }, [])
+    // useEffect(() => { // only runs dispatch the first time the component renders
+    //     dispatch(fetchChatrooms())
+    // }, [])
 
     const handleAddChatroom = () => {
         const chatroom: Chatroom = new Chatroom(title, Status.UNREAD, '', new Date());
-        dispatch(addChatroom(chatroom));
+        // dispatch(addChatroom(chatroom));
+        createChatroom(chatroom, { onSuccess: () => queryClient.invalidateQueries('chatrooms') })
     }
+    const handleMessage = () => {
+        const msg = { title: message, user: loggedInUser }
+        console.log("saving message", msg);
+
+
+        createChatmessage(msg, { onSuccess: () => queryClient.invalidateQueries('chatrooms') })
+    }
+
+
     const renderChatroom = ({ item }: { item: any }) => (
-        <Text>{item.title}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Screen2")}>
+            <Text>{item.title}</Text>
+        </TouchableOpacity>
     );
 
     return (
@@ -52,6 +77,13 @@ export default function Screen1() {
                 placeholder="Chatroom name"
             />
             <Button title="Create chatroom" onPress={handleAddChatroom} />
+
+            <TextInput
+                onChangeText={setMessage}
+                value={message}
+                placeholder="Chatmessage"
+            />
+            <Button title="Send message" onPress={handleMessage} />
         </View>
     );
 }
