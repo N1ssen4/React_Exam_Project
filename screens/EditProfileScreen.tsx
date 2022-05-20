@@ -20,7 +20,6 @@ export default function EditProfileScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Edit Profile Screen</Text>
             <Input title="What is your email?"
                 inputValue={textEmail}
                 setText={setTextEmail}

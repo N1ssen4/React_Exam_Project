@@ -4,22 +4,14 @@ import React, { useEffect } from 'react';
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Chatroom, Status } from '../entities/Chatroom';
-import { addChatroom, fetchChatrooms, toggleHappy } from '../store/actions/chat.actions';
+import { addChatroom, fetchChatrooms } from '../store/actions/chat.actions';
 import { StackParamList } from "../typings/navigations";
 
-type ScreenNavigationType = NativeStackNavigationProp<
-    StackParamList,
-    "Screen1"
->
 
-export default function Screen1() {
-    const navigation = useNavigation<ScreenNavigationType>()
+export default function Chatroomscreen() {
     const [title, onChangeTitle] = React.useState('');
-
-    const isHappy = useSelector((state: any) => state.chat.isHappy) // subscribe to redux store and select attribute (isHappy)
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
 
-    // console.log("isHappy", isHappy);
     const dispatch = useDispatch()
 
     useEffect(() => { // only runs dispatch the first time the component renders
@@ -31,22 +23,23 @@ export default function Screen1() {
         dispatch(addChatroom(chatroom));
     }
     const renderChatroom = ({ item }: { item: any }) => (
-        <Text>{item.title}</Text>
+        <Text>
+        {item.title} 
+        - 
+        {item.status}
+        </Text>
+        
     );
 
     return (
         <View style={styles.container}>
-            <Text>Screen 1</Text>
-            <Button title="Go to screen 2" onPress={() => navigation.navigate("Screen2")} />
-            <Text>{isHappy.toString()}</Text>
-            <Button title="Toggle happy" onPress={() => dispatch(toggleHappy())} />
-
+            
             <FlatList
                 data={chatrooms}
                 renderItem={renderChatroom}
             />
 
-            <TextInput
+            <TextInput style={styles.textinput}
                 onChangeText={onChangeTitle}
                 value={title}
                 placeholder="Chatroom name"
@@ -63,4 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    textinput:{
+        fontWeight: "bold"
+    }
 })

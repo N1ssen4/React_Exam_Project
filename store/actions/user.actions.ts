@@ -5,6 +5,7 @@ import { User } from '../../entities/User';
 
 export const SIGNUP = 'SIGNUP';
 export const REHYDRATE_USER = 'REHYDRATE_USER';
+export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export const rehydrateUser = (user: User, idToken: string) => {
@@ -22,7 +23,7 @@ export const signup = (email: string, password: string) => {
     return async (dispatch: any, getState: any) => {
         //const token = getState().user.token; // if you have a reducer named user(from combineReducers) with a token variable​
 
-        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwa6vi4jY6Ll_9HmfNW07uz_dlUl3Z3bI', {
+        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQvM0N78zRtv97C-lrvF2bl2-EZIsW9Bk', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,9 +36,7 @@ export const signup = (email: string, password: string) => {
                 returnSecureToken: true
             })
         });
-
         // console.log(response.json());
-
         if (!response.ok) {
             //There was a problem..
             //dispatch({type: SIGNUP_FAILED, payload: 'something'})
@@ -53,4 +52,37 @@ export const signup = (email: string, password: string) => {
             dispatch({ type: SIGNUP, payload: { user, idToken: data.idToken } })
         }
     };
+}
+
+    export const login = (email: string, password: string) => {
+        return async (dispatch: any, getState: any) => {
+            //const token = getState().user.token; // if you have a reducer named user(from combineReducers) with a token variable​
+    
+            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQvM0N78zRtv97C-lrvF2bl2-EZIsW9Bk', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ //javascript to json
+                    //key value pairs of data you want to send to server
+                    // ...
+                    email: email,
+                    password: password,
+                    returnSecureToken: true
+                })
+
+                
+            });
+            const data = await response.json();
+            console.log(data);
+            if (!response.ok) {
+                //There was a problem..
+                //dispatch({type: SIGNUP_FAILED, payload: 'something'})
+            } else {
+
+                await SecureStore.setItemAsync('idToken', data.idToken);
+    
+                dispatch({ type: LOGIN, payload: { idToken: data.idToken } })
+            }
+        };
 };
