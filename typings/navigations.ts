@@ -5,4 +5,5 @@ export type StackParamList = {
     EditProfile: undefined;
     Help: undefined;
     Login: undefined;
+    Eventroom: undefined
 }

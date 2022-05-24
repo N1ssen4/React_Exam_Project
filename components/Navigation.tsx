@@ -25,7 +25,13 @@ function ChatStackNavigator() {
         </Stack.Navigator>
     );
 }
-
+function EventStackNavigator() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Eventroom" component={DiscoverScreen} />
+        </Stack.Navigator>
+    );
+}
 function ProfileStackNavigator() {
     return (
         <Stack.Navigator>
@@ -50,7 +56,7 @@ export default function Navigation() {
                 // Show the app with all navigation
                 <Tab.Navigator screenOptions={{ headerShown: false }}>
                     <Tab.Screen name="Home" component={HomeScreen} />
-                    <Tab.Screen name="Discover" component={DiscoverScreen} />
+                    <Tab.Screen name="Discover" component={EventStackNavigator} />
                     <Tab.Screen name="Chat" component={ChatStackNavigator} />
                     <Tab.Screen name="Menu" component={ProfileStackNavigator} />
                 </Tab.Navigator>
