@@ -25,7 +25,7 @@ export default function DiscoverScreen() {
         <Text>
             {item.title}
             -
-            {item.description}
+            {item.id}
         </Text>
     )
 

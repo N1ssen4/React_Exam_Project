@@ -48,7 +48,6 @@ export default function Navigation() {
 
     return (
         <NavigationContainer>
-            {/* Move navigation related code to a seperate component that is used here */}
             {/* Determine if the user is logged in and display:
         A stack navigator (only) with signup and login
         Our "normal" app with tabs navigation */}

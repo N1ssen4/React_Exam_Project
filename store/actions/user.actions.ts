@@ -123,7 +123,7 @@ export const updateUser = (user: User, idToken: string) => {
           idToken: idToken,
           email: user.email,
           userName: user.userName,
-          photoUrl: user.photoUrl,
+          photoUrl: user.profilePicture,
           returnSecureToken: true,
         }),
       }

@@ -1,11 +1,11 @@
 export class User {
     email: string;
     userName?: string;
-    photoUrl?: string
+    profilePicture?: string
 
-    constructor(email: string, userName?: string, photoUrl?: string) {
+    constructor(email: string, userName?: string, profilePicture?: string) {
         this.email = email;
         this.userName = userName;
-        this.photoUrl = photoUrl;
+        this.profilePicture = profilePicture;
     }
 }
