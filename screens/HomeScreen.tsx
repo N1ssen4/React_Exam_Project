@@ -11,7 +11,7 @@ export default function HomeScreen() {
             <Text style={styles.title}>Home Screen</Text>
             <Button title="Logout" onPress={() => dispatch(logout())} />
             <Text>Welcome to the CBS App! </Text>
-            <Text>On this App you can create Chatrooms in the 'Chat' tab, Events in the 'Discover' tab and get help in the 'Menu' tab</Text>
+            <Text>On this App you can create Chatrooms in the 'Chat' tab, Events in the 'Discover' tab. Here is also a suprise! and get help in the 'Menu' tab</Text>
         </View>
     );
 }

@@ -9,15 +9,13 @@ import { updateUser } from '../store/actions/user.actions';
 export default function EditProfileScreen() {
     const user = useSelector((state: any ) => state.user.loggedInUser);
     const token = useSelector((state: any ) => state.user.idToken)
-    const [textEmail, setTextEmail] = useState(user.email)
     const dispatch = useDispatch();
-    const [display, setDisplay] = useState(user.Name) 
-    let [photo, setPhoto] = useState(user.profilePicture)
-    //console.log(user.email);
+    const [username, setUsername] = useState(user.Name) 
+    let [ppicture, setPpicture] = useState(user.profilePicture)
 
     const onSave = () => {
-        if (display !== '' && photo !== '') {
-            const newUser : User = new User(user.email, display, photo)
+        if (username !== '' && ppicture !== '') {
+            const newUser : User = new User(user.email, username, ppicture)
             dispatch(updateUser(newUser,token))
         } else {
             alert('ERROR')
@@ -27,18 +25,15 @@ export default function EditProfileScreen() {
     return (
         <View style={styles.container}>
             <Input title="What is your username?"
-                inputValue={display}
-                setText={setDisplay}
+                inputValue={username}
+                setText={setUsername}
                 error="Username cannot be empty"
             />
-            <Input title="What is your profilepicture url?"
-                inputValue={photo}
-                setText={setPhoto}
-                error="Username cannot be empty"
+            <Input title="Here you can put a URL for a profilepicture"
+                inputValue={ppicture}
+                setText={setPpicture}
+                error="URL cannot be empty"
             />
-            {/* <Input title="Study programme"
-                inputValue=""
-                error="Study programme cannot be empty" /> */}
 
             <Button title="Save" onPress={() => {onSave()}} />
         </View>

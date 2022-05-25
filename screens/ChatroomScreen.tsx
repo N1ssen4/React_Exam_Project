@@ -1,11 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Chatroom, Status } from '../entities/Chatroom';
 import { addChatroom, fetchChatrooms } from '../store/actions/chat.actions';
-import { StackParamList } from "../typings/navigations";
 
 
 export default function Chatroomscreen() {
@@ -14,7 +11,7 @@ export default function Chatroomscreen() {
 
     const dispatch = useDispatch()
 
-    useEffect(() => { // only runs dispatch the first time the component renders
+    useEffect(() => { // Only runs one time, the first time the component renders
         dispatch(fetchChatrooms())
     }, [])
 

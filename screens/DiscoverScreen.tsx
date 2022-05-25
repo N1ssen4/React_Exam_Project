@@ -12,7 +12,7 @@ export default function DiscoverScreen() {
     const eventrooms: Eventroom[] = useSelector((state: any) => state.event.eventrooms)
     const dispatch = useDispatch()
 
-    useEffect(()=> {
+    useEffect(()=> {  //Renders only the first time 
         dispatch(fetchEventrooms())
     }, [])
 
