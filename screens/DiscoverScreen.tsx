@@ -3,8 +3,8 @@ import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-nativ
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 import { useDispatch, useSelector } from 'react-redux';
 import { Eventroom } from '../entities/Eventroom';
-import { FirebaseSignupSuccess } from '../entities/FirebaseSignupSuccess';
 import { addEventroom, fetchEventrooms } from '../store/actions/event.actions';
+import Joke from '../components/Joke';
 
 
 export default function DiscoverScreen() {
@@ -28,15 +28,17 @@ export default function DiscoverScreen() {
             {item.description}
         </Text>
     )
+
     return (
         <View style={styles.container}>
             
             <FlatList
                 data = {eventrooms}
                 renderItem={renderEventroom}
-                />
-    
-
+            />
+            <Text>Having a tough day? Below you can get endless jokes</Text>
+            <Text>Chuck Norris Joke: </Text>
+            <Joke/>
             <TextInput 
                 onChangeText={onChangeTitle}
                 value={title}
