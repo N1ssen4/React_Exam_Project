@@ -9,6 +9,7 @@ import Joke from '../components/Joke';
 
 export default function DiscoverScreen() {
     const [title, onChangeTitle] = React.useState('')
+    const [description, onChangeDescription] = React.useState('')
     const eventrooms: Eventroom[] = useSelector((state: any) => state.event.eventrooms)
     const dispatch = useDispatch()
 
@@ -17,7 +18,7 @@ export default function DiscoverScreen() {
     }, [])
 
     const handleAddEventroom = () => {
-        const eventroom: Eventroom = new Eventroom(title,'', new Date())
+        const eventroom: Eventroom = new Eventroom(title,description, new Date())
         dispatch(addEventroom(eventroom))
     }
 
@@ -25,7 +26,7 @@ export default function DiscoverScreen() {
         <Text>
             {item.title}
             -
-            {item.id}
+            {item.description}
         </Text>
     )
 
@@ -44,6 +45,12 @@ export default function DiscoverScreen() {
                 value={title}
                 placeholder='Event Name'
             />
+            <TextInput
+            onChangeText=
+                {onChangeDescription}
+                value={description}
+                placeholder='Descripe your event here'
+                />
             <Button title='Create Event' onPress={handleAddEventroom} />
         </View>
     );
