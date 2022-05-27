@@ -123,14 +123,14 @@ export const updateUser = (user: User, idToken: string) => {
           idToken: idToken,
           email: user.email,
           userName: user.userName,
-          photoUrl: user.profilePicture,
+          ppicture: user.profilePicture,
           returnSecureToken: true,
         }),
       }
     );
     if (!response.ok) {
       //There was a problem..
-      console.log("Something went wrong in updating the username");
+      console.log("Couldn't update username");
     } else {
         
         console.log('Vi er her', user,idToken)

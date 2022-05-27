@@ -12,7 +12,7 @@ export default function ProfileScreen() {
     const user = useSelector((state: any ) => state.user.loggedInUser);
     return (
         <View style={styles.container}>
-            <Image source={{uri:user.photoUrl}} style={{height:100,width:100}}/>
+            <Image source={{uri:user.ppicture}} style={{height:100,width:100}}/>
             <Text>Profile Screen</Text>
             <Text>{user.userName}</Text>
             <Button title="Edit profile" onPress={() => navigation.navigate("EditProfile")} />

@@ -18,7 +18,7 @@ export default function EditProfileScreen() {
             const newUser : User = new User(user.email, username, ppicture)
             dispatch(updateUser(newUser,token))
         } else {
-            alert('ERROR')
+            alert('Could not save the user')
         }
     }
 
