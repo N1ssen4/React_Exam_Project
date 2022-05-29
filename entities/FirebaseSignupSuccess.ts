@@ -10,6 +10,7 @@ export class FirebaseSignupSuccess {
         public refreshToken: string, 
         public userName: string, 
         public profilePicture: string,
-        public expiresIn: string, public localId: string) {
+        public expiresIn: string, 
+        public localId: string) {
     }
 }

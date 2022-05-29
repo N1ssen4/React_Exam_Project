@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import Input from '../components/Input';
 import { logout } from '../store/actions/user.actions';
 
 export default function HomeScreen() {

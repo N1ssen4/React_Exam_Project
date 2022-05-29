@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   event: eventReducer,
 });
+
 export type RootState = ReturnType<typeof rootReducer>
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

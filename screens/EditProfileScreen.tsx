@@ -13,7 +13,7 @@ export default function EditProfileScreen() {
     let [ppicture, setPpicture] = useState(user.profilePicture)
 
     const onSave = () => {
-        if (username !== '' && ppicture !== '') {
+        if (username !== '' || ppicture !== '') {
             const newUser : User = new User(user.email, username, ppicture)
             dispatch(updateUser(newUser,token))
         } else {
