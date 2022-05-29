@@ -1,5 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import MapView,{Marker} from 'react-native-maps';

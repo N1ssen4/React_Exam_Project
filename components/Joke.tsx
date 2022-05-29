@@ -1,6 +1,6 @@
 import axios from "axios"
 import React from "react"
-import { View, Text, TouchableOpacity, Button } from "react-native"
+import { View, Text, Button } from "react-native"
 import { useQuery } from "react-query"
 
 const joke = () => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../App';
 import Input from '../components/Input';
 import { User } from '../entities/User';
 import { updateUser } from '../store/actions/user.actions';

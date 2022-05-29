@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 import { useDispatch, useSelector } from 'react-redux';
 import { Eventroom } from '../entities/Eventroom';
 import { addEventroom, fetchEventrooms } from '../store/actions/event.actions';
