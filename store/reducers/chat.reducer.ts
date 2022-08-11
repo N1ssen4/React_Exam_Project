@@ -3,12 +3,10 @@ import { ADD_CHATROOM, DELETE_CHATROOM, FETCH_CHATROOMS } from "../actions/chat.
 
 interface ReduxState {
     chatrooms: Chatroom[]
-
 }
 
 const initialState: ReduxState = {
     chatrooms: [],
-
 }
 
 interface ReduxAction {

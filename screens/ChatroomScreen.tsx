@@ -34,7 +34,6 @@ export default function Chatroomscreen() {
             <FlatList
                 data={chatrooms}
                 renderItem={renderChatroom}
-        
             />
 
             <TextInput style={styles.textinput}

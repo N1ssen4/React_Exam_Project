@@ -18,6 +18,7 @@ const joke = () => {
         </View>
         )
     }
+
     if (isError){
         <View>
             <Text>Error...</Text>
